@@ -14,7 +14,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "client")));
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 
 require('./api/users_api.js')(app, db, _);
