@@ -9,7 +9,7 @@ const path = require("path");
 
 
 
-var PORT = 9898;
+var PORT = process.env.PORT || 8080;
 var app = express();
 
 app.use(bodyParser.json());
