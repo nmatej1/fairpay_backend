@@ -1,0 +1,28 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "creditcard-generator": "0.0.7",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.0",
+    "mssql": "^4.1.0",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "push.js": "^1.0.8",
+    "sequelize": "^4.38.0",
+    "sequelize-auto": "^0.4.29",
+    "sqlite": "^2.9.2",
+    "underscore": "^1.9.1",
+    "web-push": "^3.3.3"
+  }
+}
