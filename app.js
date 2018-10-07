@@ -22,24 +22,26 @@ require('./api/cards_api.js')(app, db, _);
 require('./api/communities_api.js')(app, db, _);
 require('./api/transaction_api.js')(app, db, _);
 
-const publicVapidKey =
-    "BN3B4f3H6zHcX7nvnOQTMt4PjnfVeAzbg_PK5bjOFtDbNs8uKKmoCEClEODkgi9eT4zqacbnqznWnODbX5_yvTk";
-const privateVapidKey = "PCbq0i1OTsPTF7c17pCq97U9y16YMa_4fM8679KNpTQ";
+const vapidKeys = webpush.generateVAPIDKeys();
 
 webpush.setVapidDetails(
     "mailto:test@test.com",
-    publicVapidKey,
-    privateVapidKey
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
 );
 
 
 app.get('/sendPushAll', function(req, res) {
     db.users.findAll({}).then((users) => {
-
+        console.log(users.length)
         for(var i = 0; i < users.length; i++){
+
             var user = users[i]
             var token = JSON.parse(user.get("pushToken"))
-
+            if (token === undefined){
+                continue;
+            }
+            console.log(i)
             // Create payload
             const payload = JSON.stringify({ title: "FairPay" });
             webpush.sendNotification(token, payload).catch(err => console.error(err));
@@ -56,6 +58,11 @@ app.get('/sendPushAll', function(req, res) {
         });
     });
 });
+
+app.post('/getPublicKey', function(req, res) {
+    res.status(200).send({"publicVapidKey": vapidKeys.publicKey,});
+})
+
 
 db.sequelize.sync({
     // force: true
