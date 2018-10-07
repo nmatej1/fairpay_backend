@@ -35,65 +35,8 @@ client.messages.create({
     body: 'Hello from Node',
     to: '+421918978947',  // Text this number
     from: '+441344567341' // From a valid Twilio number
-})
-.then((message) => console.log(message.sid));
+}).then((message) => console.log(message.sid));
 
-//
-//
-app.get('/sendPushAll', function(req, res) {
-    db.users.findAll({}).then((users) => {
-        console.log(users.length)
-
-        var user = users[0]
-        var token = JSON.parse(user.get("pushToken"))
-        if (token === undefined){
-            continue;
-        }
-        // Create payload
-        const payload = JSON.stringify({ title: "FairPay" });
-        webpush.sendNotification(token, payload).catch(err => console.error(err));
-
-        var user = users[1]
-        var token = JSON.parse(user.get("pushToken"))
-        if (token === undefined){
-            continue;
-        }
-
-        // Create payload
-        const payload = JSON.stringify({ title: "FairPay" });
-        webpush.sendNotification(token, payload).catch(err => console.error(err));
-
-        var user = users[2]
-        var token = JSON.parse(user.get("pushToken"))
-        if (token === undefined){
-            continue;
-        }
-        console.log(0)
-        // Create payload
-        const payload = JSON.stringify({ title: "FairPay" });
-        webpush.sendNotification(token, payload).catch(err => console.error(err));
-
-        var user = users[3]
-        var token = JSON.parse(user.get("pushToken"))
-        if (token === undefined){
-            continue;
-        }
-        // Create payload
-        const payload = JSON.stringify({ title: "FairPay" });
-        webpush.sendNotification(token, payload).catch(err => console.error(err));
-
-        res.status(200).send();
-    }, (error) => {
-        let errorMsg = error.errors[0].message + " -> " + error.errors[0].path;
-        if (!error.errors[0].message || !error.errors[0].path) {
-            errorMsg = error;
-        }
-        let code = (!_.isUndefined(error.code)) ? error.code : 400;
-        res.status(code).json({
-            message : errorMsg
-        });
-    });
-});
 //
 // app.post('/getPublicKey', function(req, res) {
 //     res.status(200).send({"publicVapidKey": vapidKeys.publicKey,});

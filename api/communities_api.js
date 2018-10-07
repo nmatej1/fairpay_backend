@@ -62,6 +62,17 @@ module.exports = function(app, db, _) {
         });
     });
 
+    app.get('/get_all_data', function(req, res) {
+        var request = "SELECT * FROM users_communities u_com JOIN users us ON us.id = u_com.userId JOIN communities c ON c.id = u_com.communityId"
+        db.sequelize.query(request).then(result => {
+            res.status(200).json(result[0]);
+        }).catch((error) => {
+            res.status(400).json(error);
+        });
+    });
+
+
+
 
 
 
