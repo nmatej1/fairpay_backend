@@ -21,28 +21,6 @@ require('./api/cards_api.js')(app, db, _);
 require('./api/communities_api.js')(app, db, _);
 require('./api/transaction_api.js')(app, db, _);
 
-
-
-// Download the helper library from https://www.twilio.com/docs/node/install
-// Your Account Sid and Auth Token from twilio.com/console
-var accountSid = 'AC9e40566719dd4e005111415b0b9dfc8f'; // Your Account SID from www.twilio.com/console
-var authToken = '96d12177abe2d27a37877d0543d6cba6';   // Your Auth Token from www.twilio.com/console
-
-var twilio = require('twilio');
-var client = new twilio(accountSid, authToken);
-
-client.messages.create({
-    body: 'Hello from Node',
-    to: '+421918978947',  // Text this number
-    from: '+441344567341' // From a valid Twilio number
-}).then((message) => console.log(message.sid));
-
-//
-// app.post('/getPublicKey', function(req, res) {
-//     res.status(200).send({"publicVapidKey": vapidKeys.publicKey,});
-// })
-
-
 db.sequelize.sync({
     // force: true
 }).then(function() {
