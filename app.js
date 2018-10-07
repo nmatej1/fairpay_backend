@@ -21,7 +21,6 @@ require('./api/cards_api.js')(app, db, _);
 require('./api/communities_api.js')(app, db, _);
 require('./api/transaction_api.js')(app, db, _);
 
-
 db.sequelize.sync({
     // force: true
 }).then(function() {
